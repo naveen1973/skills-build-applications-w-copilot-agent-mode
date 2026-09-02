@@ -205,7 +205,7 @@ export default function Workouts() {
                   <ListGroup variant="flush" className="mb-3">
                     {workout.exercises && workout.exercises.slice(0, 5).map((exercise, idx) => (
                       <div key={idx} className="small">
-                        • {exercise}
+                        • {exercise.name} ({exercise.sets}×{exercise.reps})
                       </div>
                     ))}
                     {workout.exercises && workout.exercises.length > 5 && (
