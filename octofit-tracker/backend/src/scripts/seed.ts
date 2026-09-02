@@ -1,5 +1,5 @@
 /**
- * OctoFit Tracker Database Seed Script
+ * Seed the octofit_db database with test data
  * 
  * This script populates the octofit_db MongoDB database with comprehensive test data
  * for the OctoFit Tracker multi-tier fitness application.
