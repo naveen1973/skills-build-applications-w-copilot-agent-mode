@@ -1,122 +1,84 @@
-import { useState } from 'react'
-import heroImg from './assets/hero.png'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import './App.css'
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import { Container, Navbar, Nav, Alert } from 'react-bootstrap';
+import Users from './components/Users';
+import Activities from './components/Activities';
+import Teams from './components/Teams';
+import Leaderboard from './components/Leaderboard';
+import Workouts from './components/Workouts';
+import { API_BASE_URL } from './api';
+import './App.css';
 
 function App() {
-  const [count, setCount] = useState(0)
+  const codespaceName = import.meta.env.VITE_CODESPACE_NAME;
+  const isProperlyConfigured = codespaceName || API_BASE_URL.includes('localhost');
 
   return (
-    <>
-      <section id="center">
-        <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
-        </div>
-        <div>
-          <h1>Get started</h1>
-          <p>
-            Edit <code>src/App.jsx</code> and save to test <code>HMR</code>
-          </p>
-        </div>
-        <button
-          type="button"
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
-        >
-          Count is {count}
-        </button>
-      </section>
+    <Router>
+      <div className="min-vh-100 d-flex flex-column">
+        {/* Navigation Bar */}
+        <Navbar bg="dark" data-bs-theme="dark" sticky="top" expand="lg">
+          <Container>
+            <Navbar.Brand href="/">
+              🐙 OctoFit Tracker
+            </Navbar.Brand>
+            <Navbar.Toggle aria-controls="basic-navbar-nav" />
+            <Navbar.Collapse id="basic-navbar-nav">
+              <Nav className="ms-auto">
+                <Nav.Link as={Link} to="/">Users</Nav.Link>
+                <Nav.Link as={Link} to="/activities">Activities</Nav.Link>
+                <Nav.Link as={Link} to="/leaderboard">Leaderboard</Nav.Link>
+                <Nav.Link as={Link} to="/teams">Teams</Nav.Link>
+                <Nav.Link as={Link} to="/workouts">Workouts</Nav.Link>
+              </Nav>
+            </Navbar.Collapse>
+          </Container>
+        </Navbar>
 
-      <div className="ticks"></div>
+        {/* Configuration Alert */}
+        {!isProperlyConfigured && (
+          <Container className="mt-3">
+            <Alert variant="warning">
+              ⚠️ <strong>Configuration Issue:</strong> VITE_CODESPACE_NAME is not set.
+              <br />
+              For Codespaces: Add <code>VITE_CODESPACE_NAME=your-codespace-name</code> to <code>.env.local</code>
+              <br />
+              For localhost: Using fallback URL {API_BASE_URL}
+            </Alert>
+          </Container>
+        )}
 
-      <section id="next-steps">
-        <div id="docs">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#documentation-icon"></use>
-          </svg>
-          <h2>Documentation</h2>
-          <p>Your questions, answered</p>
-          <ul>
-            <li>
-              <a href="https://vite.dev/" target="_blank">
-                <img className="logo" src={viteLogo} alt="" />
-                Explore Vite
-              </a>
-            </li>
-            <li>
-              <a href="https://react.dev/" target="_blank">
-                <img className="button-icon" src={reactLogo} alt="" />
-                Learn more
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div id="social">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
-          </svg>
-          <h2>Connect with us</h2>
-          <p>Join the Vite community</p>
-          <ul>
-            <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#github-icon"></use>
-                </svg>
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#discord-icon"></use>
-                </svg>
-                Discord
-              </a>
-            </li>
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#x-icon"></use>
-                </svg>
-                X.com
-              </a>
-            </li>
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                Bluesky
-              </a>
-            </li>
-          </ul>
-        </div>
-      </section>
+        {/* API Base URL Info */}
+        <Container className="mt-2 mb-2">
+          <small className="text-muted">
+            API: {API_BASE_URL}/api
+            {codespaceName && ` (Codespaces: ${codespaceName})`}
+            {!codespaceName && ' (Localhost)'}
+          </small>
+        </Container>
 
-      <div className="ticks"></div>
-      <section id="spacer"></section>
-    </>
-  )
+        {/* Main Content */}
+        <div className="flex-grow-1">
+          <Routes>
+            <Route path="/" element={<Users />} />
+            <Route path="/activities" element={<Activities />} />
+            <Route path="/leaderboard" element={<Leaderboard />} />
+            <Route path="/teams" element={<Teams />} />
+            <Route path="/workouts" element={<Workouts />} />
+          </Routes>
+        </div>
+
+        {/* Footer */}
+        <footer className="bg-dark text-white text-center py-4 mt-5">
+          <Container>
+            <p className="mb-2">🐙 OctoFit Tracker - Multi-tier Fitness Application</p>
+            <small>
+              React 19 + Vite | Bootstrap | Express.js API | MongoDB
+            </small>
+          </Container>
+        </footer>
+      </div>
+    </Router>
+  );
 }
 
-export default App
+export default App;
