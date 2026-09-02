@@ -2,6 +2,7 @@ import express, { Express, Request, Response } from 'express';
 import cors from 'cors';
 import { connectDB } from './config/database';
 import { errorHandler, notFoundHandler } from './middleware/errorHandler';
+import API_CONFIG from './config/api';
 
 // Routes
 import userRoutes from './routes/users';
@@ -11,7 +12,7 @@ import leaderboardRoutes from './routes/leaderboard';
 import workoutRoutes from './routes/workouts';
 
 const app: Express = express();
-const PORT = process.env.PORT || 8000;
+const PORT = API_CONFIG.port;
 
 // Middleware
 app.use(cors());
@@ -29,6 +30,9 @@ app.get('/api/health', (req: Request, res: Response) => {
     status: 'OK',
     message: 'OctoFit Tracker API is running',
     timestamp: new Date().toISOString(),
+    environment: API_CONFIG.environment,
+    baseUrl: API_CONFIG.baseUrl,
+    isCodespaces: API_CONFIG.isCodespaces,
   });
 });
 
@@ -45,14 +49,8 @@ app.use(errorHandler);
 
 // Start server
 app.listen(PORT, () => {
-  console.log(`
-╔════════════════════════════════════════════════╗
-║      🐙 OctoFit Tracker API Server Running    ║
-║  Port: ${PORT}
-║  Database: octofit_db
-║  Environment: ${process.env.NODE_ENV || 'development'}
-╚════════════════════════════════════════════════╝
-  `);
+  API_CONFIG.logConfig();
+  console.log(`✅ OctoFit Tracker API listening on port ${PORT}`);
 });
 
 export default app;
