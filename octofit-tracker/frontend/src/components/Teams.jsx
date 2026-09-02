@@ -1,3 +1,14 @@
+/**
+ * Teams Component
+ * 
+ * Manages team creation and membership.
+ * 
+ * API Endpoints:
+ * - GET  https://{CODESPACE_NAME}-8000.app.github.dev/api/teams/
+ * - POST https://{CODESPACE_NAME}-8000.app.github.dev/api/teams/
+ * - DELETE https://{CODESPACE_NAME}-8000.app.github.dev/api/teams/{id}
+ */
+
 import { useEffect, useState } from 'react';
 import { Container, Row, Col, Card, Button, Form, Alert, Spinner, ListGroup } from 'react-bootstrap';
 import api from '../api';

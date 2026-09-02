@@ -1,3 +1,14 @@
+/**
+ * Activities Component
+ * 
+ * Tracks fitness activities and workout logging.
+ * 
+ * API Endpoints:
+ * - GET  https://{CODESPACE_NAME}-8000.app.github.dev/api/activities/
+ * - POST https://{CODESPACE_NAME}-8000.app.github.dev/api/activities/
+ * - DELETE https://{CODESPACE_NAME}-8000.app.github.dev/api/activities/{id}
+ */
+
 import { useEffect, useState } from 'react';
 import { Container, Row, Col, Card, Button, Form, Alert, Spinner, Badge } from 'react-bootstrap';
 import api from '../api';

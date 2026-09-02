@@ -1,3 +1,14 @@
+/**
+ * Workouts Component
+ * 
+ * Creates and manages workout plans.
+ * 
+ * API Endpoints:
+ * - GET  https://{CODESPACE_NAME}-8000.app.github.dev/api/workouts/
+ * - POST https://{CODESPACE_NAME}-8000.app.github.dev/api/workouts/
+ * - DELETE https://{CODESPACE_NAME}-8000.app.github.dev/api/workouts/{id}
+ */
+
 import { useEffect, useState } from 'react';
 import { Container, Row, Col, Card, Button, Form, Alert, Spinner, Badge, ListGroup } from 'react-bootstrap';
 import api from '../api';

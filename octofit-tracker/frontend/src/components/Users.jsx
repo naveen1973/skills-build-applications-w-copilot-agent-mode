@@ -1,3 +1,14 @@
+/**
+ * Users Component
+ * 
+ * Manages user profiles and CRUD operations.
+ * 
+ * API Endpoints:
+ * - GET  https://{CODESPACE_NAME}-8000.app.github.dev/api/users/
+ * - POST https://{CODESPACE_NAME}-8000.app.github.dev/api/users/
+ * - DELETE https://{CODESPACE_NAME}-8000.app.github.dev/api/users/{id}
+ */
+
 import { useEffect, useState } from 'react';
 import { Container, Row, Col, Card, Button, Form, Alert, Spinner } from 'react-bootstrap';
 import api from '../api';

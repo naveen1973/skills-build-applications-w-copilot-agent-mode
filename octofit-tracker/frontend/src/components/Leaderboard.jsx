@@ -1,3 +1,14 @@
+/**
+ * Leaderboard Component
+ * 
+ * Displays global rankings and competitive leaderboard.
+ * 
+ * API Endpoints:
+ * - GET https://{CODESPACE_NAME}-8000.app.github.dev/api/leaderboard/
+ * - GET https://{CODESPACE_NAME}-8000.app.github.dev/api/leaderboard/team/{teamId}
+ * - GET https://{CODESPACE_NAME}-8000.app.github.dev/api/leaderboard/user/{userId}
+ */
+
 import { useEffect, useState } from 'react';
 import { Container, Row, Col, Table, Alert, Spinner, Badge } from 'react-bootstrap';
 import api from '../api';
