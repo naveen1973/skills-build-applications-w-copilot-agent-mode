@@ -1,3 +1,56 @@
+/**
+ * OctoFit Tracker Database Seed Script
+ * 
+ * This script populates the octofit_db MongoDB database with comprehensive test data
+ * for the OctoFit Tracker multi-tier fitness application.
+ * 
+ * Test Data Seeded:
+ * - 5 User Profiles: Sample users with diverse fitness specializations
+ *   * Alice Johnson (@alice_runner) - Marathon trainer
+ *   * Bob Smith (@bob_cyclist) - Mountain bike expert
+ *   * Carol Williams (@carol_swimmer) - Triathlon athlete
+ *   * David Brown (@david_yogi) - Yoga instructor
+ *   * Emma Davis (@emma_crossfit) - CrossFit coach
+ * 
+ * - 3 Teams: Pre-configured fitness teams with members
+ *   * Morning Runners (Led by Alice, 3 members)
+ *   * Fitness Warriors (Led by Emma, 3 members)
+ *   * Weekend Warriors (Led by Bob, 2 members)
+ * 
+ * - 10 Activities: Realistic fitness activity logs
+ *   * 2 Running activities (350 cal, 520 cal)
+ *   * 2 Cycling activities (650 cal, 900 cal)
+ *   * 2 Swimming activities (500 cal, 700 cal)
+ *   * 2 Yoga activities (200 cal, 150 cal)
+ *   * 2 Gym/CrossFit activities (800 cal, 1200 cal)
+ *   Total: 7,420 calories across all activities
+ * 
+ * - 5 Leaderboard Entries: Auto-calculated rankings
+ *   * Emma Davis - 200 points (2000 total calories)
+ *   * Bob Smith - 155 points (1550 total calories)
+ *   * Carol Williams - 120 points (1200 total calories)
+ *   * Alice Johnson - 87 points (870 total calories)
+ *   * David Brown - 35 points (350 total calories)
+ *   Scoring Formula: Points = Math.ceil(calories / 10)
+ * 
+ * - 6 Workout Plans: Personalized fitness programs
+ *   * Marathon Training (60 min, Advanced Cardio)
+ *   * Speed Work (45 min, Advanced Cardio)
+ *   * Mountain Bike Skills (90 min, Advanced Sports)
+ *   * Triathlon Preparation (120 min, Advanced Cardio)
+ *   * Yoga for Flexibility (60 min, Intermediate Flexibility)
+ *   * CrossFit WOD (45 min, Advanced Strength)
+ * 
+ * Total Documents Created: 29
+ * Database: octofit_db
+ * Collections: users, activities, teams, leaderboards, workouts
+ * 
+ * Usage:
+ *   npm run seed --prefix octofit-tracker/backend
+ * 
+ * Note: This script clears all existing data before seeding.
+ */
+
 import mongoose from 'mongoose';
 import User from '../models/User';
 import Activity from '../models/Activity';
